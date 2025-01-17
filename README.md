@@ -68,6 +68,7 @@ Below are the core components designed in Logisim-evolution:
 - **Register File**: Stores data during program execution.
 - **Control Circuit**: Handles instruction decoding and control signals.
 - **Memory Module**: Stores programs and data.
+- **Program Counter**: Increment and store a data. Can be reset.
 
 ---
 
