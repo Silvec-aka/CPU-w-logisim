@@ -4,8 +4,8 @@
 
 - [📋 Project Overview](#project-overview)
 - [✨ Features](#features)
-- [🏛️ Architecture](#architecture)
 - [🔧 Components](#components)
+- [🏛️ Assembly Instructions](#Assembly-Instructions)
 - [🚀 Getting Started](#getting-started)
 - [📂 Usage](#usage)
 - [🙏 Acknowledgments](#acknowledgments)
@@ -14,49 +14,30 @@
 
 ## 📋 Project Overview
 
-This project involves designing and implementing a fully functional 16-bit CPU using [Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution). The CPU is built to execute basic instructions and serves as an educational demonstration of digital logic design and computer architecture principles.
+This project involves the implementation of a simple 16-bit CPU designed in 
+[Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution). 
+The CPU is built as part of an educational project inspired by the 
+[Nand2Tetris](https://www.nand2tetris.org/) course. It demonstrates the basics 
+of computer architecture, including instruction execution, memory management, 
+and arithmetic operations.
 
 ### Goals:
 
-- Understand and implement key concepts of computer architecture.
+- Understand and implement key concepts of CPU architecture.
+- Build a modular CPU architecture.
 - Learn to design and test digital circuits using Logisim-evolution.
-- Build a modular and extensible CPU architecture.
 
 ---
 
 ## ✨ Features
 
-- **16-bit ALU**: Performs arithmetic and logical operations.
-- **Registers**: General-purpose and special-purpose registers.
-- **Memory**: Includes 16k RAM for program and data storage.
-
----
-
-## 🏛️ Architecture
-
-The CPU is designed using a modular approach, divided into key components:
-
-### 1. **Arithmetic Logic Unit (ALU)**:
-
-- Supports operations like ADD, SUB, AND, OR, NOT, and XOR.
-- Status flags for zero, carry.
-
-<p align="center">
-    <img src="./img/ALU_table.png" alt="ArithmeticAndLogocOperationTable" width="450"/>
-</p>
-
-### 2. **Registers**:
-
-- General-purpose registers.
-
-### 3. **Control Unit**:
-
-### 4. **Memory**:
-
-- RAM module for instruction and data storage.
-- Addressable space based on a 16-bit address bus.
-
-### 5. **Instruction Set**:
+- **16-bit Architecture**: Supports 16-bit instructions and data.
+- **Arithmetic Logic Unit (ALU)**: Performs essential arithmetic and logical 
+operations such as addition, subtraction, and bitwise AND/OR.
+- **Registers**: Includes general-purpose registers and a program counter for 
+instruction execution.
+- **Memory**: Features ROM for program storage and RAM for data storage.
+- **Instruction Set**: Executes a small, custom-designed instruction set.
 
 ---
 
@@ -72,7 +53,100 @@ Below are the core components designed in Logisim-evolution:
 
 ---
 
+## 🏛️ Assembly Instructions
+
+The CPU is designed to use specific assembly instruction. There is two type of
+instruction, A and C.
+
+#### A-instruction
+
+`Symbolic : @x` x is a decimal value .
+
+`Binary : 0 a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15` aa..a is the 15 
+bits value of x.
+
+x is the decimal value of a 15-bit address ranging from 0 to 32767. 
+When the instruction is use we can then access the information at the location
+ and use it.
+
+#### C-instruction
+
+`Symbolic : dest = comp; jump` Only comp is mandatory.
+
+`Binary : 1 1 1 a c1 c2 c3 c4 c5 c6 d1 d2 d3 j1 j2 j3`
+
+This type of instruction is more complex and I will not detail here how it works.
+I'll simply explain here what compose this instrustion and what it does in the CPU.
+
+First come the `acccccc` part which is here to directly follow the ALU talbe flags
+which follows:
+
+<p align="center">
+    <img src="./img/ALU_table_2.png" alt="ArithmeticAndLogocOperationTable" width="450"/>
+</p>
+
+Operators talbe of `acccccc`:
+
+| **comp** | **a** | **c1** | **c2** | **c3** | **c4** | **c5** | **c6** |
+|----------|-------|--------|--------|--------|--------|--------|--------|
+| 0        | 0     | 1      | 0      | 1      | 0      | 1      | 0      |
+| 1        | 0     | 1      | 1      | 1      | 1      | 1      | 1      |
+| -1       | 0     | 1      | 1      | 1      | 1      | 1      | 1      |
+| D        | 0     | 0      | 0      | 1      | 1      | 0      | 0      |
+| A        | 0     | 1      | 1      | 0      | 0      | 1      | 0      |
+| !D       | 0     | 0      | 1      | 1      | 1      | 0      | 0      |
+| !A       | 0     | 1      | 1      | 0      | 1      | 1      | 0      |
+| -D       | 0     | 0      | 1      | 1      | 1      | 1      | 0      |
+| -A       | 0     | 1      | 1      | 0      | 1      | 1      | 1      |
+| D+1      | 0     | 0      | 1      | 1      | 1      | 1      | 1      |
+| A+1      | 0     | 1      | 1      | 0      | 1      | 1      | 1      |
+| D-1      | 0     | 0      | 0      | 1      | 1      | 0      | 0      |
+| A-1      | 0     | 1      | 1      | 0      | 0      | 1      | 0      |
+| D+A      | 0     | 0      | 0      | 0      | 0      | 0      | 0      |
+| D-A      | 0     | 0      | 1      | 1      | 1      | 0      | 1      |
+| A-D      | 0     | 1      | 1      | 0      | 0      | 0      | 1      |
+| D&A      | 0     | 0      | 0      | 0      | 0      | 0      | 0      |
+| D|A      | 0     | 0      | 1      | 1      | 1      | 0      | 1      |
+| M        | 1     | 1      | 0      | 1      | 0      | 1      | 0      |
+| !M       | 1     | 1      | 0      | 1      | 1      | 1      | 0      |
+| -M       | 1     | 1      | 0      | 1      | 1      | 1      | 1      |
+| M+1      | 1     | 1      | 0      | 1      | 1      | 1      | 1      |
+| M-1      | 1     | 1      | 0      | 1      | 0      | 1      | 0      |
+| D+M      | 1     | 0      | 0      | 0      | 0      | 0      | 0      |
+| D-M      | 1     | 0      | 1      | 1      | 1      | 0      | 1      |
+| M-D      | 1     | 1      | 1      | 0      | 0      | 0      | 1      |
+| D&M      | 1     | 0      | 0      | 0      | 0      | 0      | 0      |
+| D|M      | 1     | 0      | 1      | 1      | 1      | 0      | 1      |
+
+Destination table for `ddd`:
+|dest|d|d|d|Effect: store *comp* in|
+|:---:|:---:|:---:|:---:|:---:|
+null|0|0|0|the value is not stored
+M|0|1|1|RAM[A]
+D|0|1|0|D register (reg)
+DM|0|1|1|D register and RAM[A]
+A|1|0|0|A reg
+AM|1|0|1|A reg and RAM[A]
+AD|1|1|0|A reg and D reg
+ADM|1|1|1|A reg, D reg, and RAM[A]
+
+Comparison table for `jjj`:
+|mnemonic|j1|j2|j3|Effect|
+|:---:|:---:|:---:|:---:|:---:|
+null|0|0|0|no jump
+JGT|0|0|1|if *comp* > 0 jump
+JEQ|0|1|0|JEQ|if *comp* = 0 jump
+JGE|0|1|1|JGE|if *comp* ≥ 0 jump
+JLT|1|0|0|JLT|if *comp* < 0 jump
+JNE|1|0|1|JNE|if *comp* ≠ 0 jump
+JLE|1|1|0|JLE|if *comp* ≤ 0 jump
+JMP|1|1|1|JMP|unconditionnal jump
+
+---
+
 ## 🛠️ Getting Started
+
+To explore and simulate the CPU design, follow these steps:
 
 ### Prerequisites
 
@@ -80,30 +154,52 @@ Below are the core components designed in Logisim-evolution:
 - Basic understanding of digital logic design.
 - Familiarity with computer architecture concepts.
 
-### Installation
+### Steps
 
-1. Clone this repository:
+1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/Silvec-aka/CPU-w-logisim.git
+   git clone https://github.com/Silvec-aka/HackCPU-Logisim.git
+   cd HackCPU-Logisim
    ```
-2. Open the project in Logisim-evolution:
+2. **Open in Logisim-evolution**:
+
    - Launch Logisim-evolution.
-   - Open the `.circ` file in the repository.
+   - Open the `CPULib.circ` file from the cloned repository in `Elements/CPU`.
+
+3. **Simulate the CPU**:
+   - Load a program into the ROM module.
+   - Run the simulation to observe how instructions are executed.
 
 ---
 
 ## 📂 Usage
 
-1. Load the CPU circuit in Logisim-evolution.
-2. Set up a program in the memory module using the pre-defined format.
-3. Start the simulation by activating the clock.
-4. Monitor the registers, ALU, and memory for execution results.
+### Loading a Program
+
+To load a program into the CPU:
+
+- Open the ROM module in Logisim-evolution.
+- Input the machine code instructions directly into the ROM.
+
+### Observing Execution
+
+- Use the clock to step through each instruction.
+- Monitor the state of the registers, ALU, and memory in real time.
 
 ### Example Program
+
+Here is an example of a simple program (in machine code):
+
+```plaintext
+0000: 0001 0010 0011 0100  # Example instructions (adjust per your ISA)
+```
 
 ---
 
 ## 🙏 Acknowledgments
 
-- [Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution) for providing an excellent and open source tool for digital logic design.
+- [Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution) 
+for providing an excellent and open source tool for digital logic design.
+- **Nand2Tetris**: The [Nand2Tetris](https://www.nand2tetris.org/) course for 
+inspiring this project.
 - [The Elements of Computing Systems, second edition](https://mitpress.mit.edu/9780262539807/the-elements-of-computing-systems/)
