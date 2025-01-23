@@ -60,13 +60,13 @@ instruction, A and C.
 
 #### A-instruction
 
-`Symbolic : @x` x is a decimal value .
+`Symbolic : @x` x is a decimal value.
 
 `Binary : 0 a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15` aa..a is the 15 
 bits value of x.
 
 x is the decimal value of a 15-bit address ranging from 0 to 32767. 
-When the instruction is use we can then access the information at the location
+When the instruction is used we can then access the information at the location
  and use it.
 
 #### C-instruction
@@ -78,45 +78,52 @@ When the instruction is use we can then access the information at the location
 This type of instruction is more complex and I will not detail here how it works.
 I'll simply explain here what compose this instrustion and what it does in the CPU.
 
-First come the `acccccc` part which is here to directly follow the ALU talbe flags
-which follows:
+First come the `acccccc` part which is here to directly follow the ALU implemention.
+
+ALU Logic table:
 
 <p align="center">
     <img src="./img/ALU_table_2.png" alt="ArithmeticAndLogocOperationTable" width="450"/>
 </p>
 
-Operators talbe of `acccccc`:
+Operators table of `acccccc`:
 
-| **comp** | **a** | **c1** | **c2** | **c3** | **c4** | **c5** | **c6** |
-|----------|-------|--------|--------|--------|--------|--------|--------|
-| 0        | 0     | 1      | 0      | 1      | 0      | 1      | 0      |
-| 1        | 0     | 1      | 1      | 1      | 1      | 1      | 1      |
-| -1       | 0     | 1      | 1      | 1      | 1      | 1      | 1      |
-| D        | 0     | 0      | 0      | 1      | 1      | 0      | 0      |
-| A        | 0     | 1      | 1      | 0      | 0      | 1      | 0      |
-| !D       | 0     | 0      | 1      | 1      | 1      | 0      | 0      |
-| !A       | 0     | 1      | 1      | 0      | 1      | 1      | 0      |
-| -D       | 0     | 0      | 1      | 1      | 1      | 1      | 0      |
-| -A       | 0     | 1      | 1      | 0      | 1      | 1      | 1      |
-| D+1      | 0     | 0      | 1      | 1      | 1      | 1      | 1      |
-| A+1      | 0     | 1      | 1      | 0      | 1      | 1      | 1      |
-| D-1      | 0     | 0      | 0      | 1      | 1      | 0      | 0      |
-| A-1      | 0     | 1      | 1      | 0      | 0      | 1      | 0      |
-| D+A      | 0     | 0      | 0      | 0      | 0      | 0      | 0      |
-| D-A      | 0     | 0      | 1      | 1      | 1      | 0      | 1      |
-| A-D      | 0     | 1      | 1      | 0      | 0      | 0      | 1      |
-| D&A      | 0     | 0      | 0      | 0      | 0      | 0      | 0      |
-| D|A      | 0     | 0      | 1      | 1      | 1      | 0      | 1      |
-| M        | 1     | 1      | 0      | 1      | 0      | 1      | 0      |
-| !M       | 1     | 1      | 0      | 1      | 1      | 1      | 0      |
-| -M       | 1     | 1      | 0      | 1      | 1      | 1      | 1      |
-| M+1      | 1     | 1      | 0      | 1      | 1      | 1      | 1      |
-| M-1      | 1     | 1      | 0      | 1      | 0      | 1      | 0      |
-| D+M      | 1     | 0      | 0      | 0      | 0      | 0      | 0      |
-| D-M      | 1     | 0      | 1      | 1      | 1      | 0      | 1      |
-| M-D      | 1     | 1      | 1      | 0      | 0      | 0      | 1      |
-| D&M      | 1     | 0      | 0      | 0      | 0      | 0      | 0      |
-| D|M      | 1     | 0      | 1      | 1      | 1      | 0      | 1      |
+if a=0:
+
+| **comp** | **c1** | **c2** | **c3** | **c4** | **c5** | **c6** |
+|----------|--------|--------|--------|--------|--------|--------|
+| 0        | 1      | 0      | 1      | 0      | 1      | 0      |
+| 1        | 1      | 1      | 1      | 1      | 1      | 1      |
+| -1       | 1      | 1      | 1      | 1      | 1      | 1      |
+| D        | 0      | 0      | 1      | 1      | 0      | 0      |
+| A        | 1      | 1      | 0      | 0      | 1      | 0      |
+| !D       | 0      | 1      | 1      | 1      | 0      | 0      |
+| !A       | 1      | 1      | 0      | 1      | 1      | 0      |
+| -D       | 0      | 1      | 1      | 1      | 1      | 0      |
+| -A       | 1      | 1      | 0      | 1      | 1      | 1      |
+| D+1      | 0      | 1      | 1      | 1      | 1      | 1      |
+| A+1      | 1      | 1      | 0      | 1      | 1      | 1      |
+| D-1      | 0      | 0      | 1      | 1      | 0      | 0      |
+| A-1      | 1      | 1      | 0      | 0      | 1      | 0      |
+| D+A      | 0      | 0      | 0      | 0      | 0      | 0      |
+| D-A      | 0      | 1      | 1      | 1      | 0      | 1      |
+| A-D      | 1      | 1      | 0      | 0      | 0      | 1      |
+| D&A      | 0      | 0      | 0      | 0      | 0      | 0      |
+| D|A      | 0      | 1      | 1      | 1      | 0      | 1      |
+
+if a=1: 
+| **comp** | **c1** | **c2** | **c3** | **c4** | **c5** | **c6** |
+|----------|--------|--------|--------|--------|--------|--------|
+| M        | 1      | 0      | 1      | 0      | 1      | 0      |
+| !M       | 1      | 0      | 1      | 1      | 1      | 0      |
+| -M       | 1      | 0      | 1      | 1      | 1      | 1      |
+| M+1      | 1      | 0      | 1      | 1      | 1      | 1      |
+| M-1      | 1      | 0      | 1      | 0      | 1      | 0      |
+| D+M      | 0      | 0      | 0      | 0      | 0      | 0      |
+| D-M      | 0      | 1      | 1      | 1      | 0      | 1      |
+| M-D      | 1      | 1      | 0      | 0      | 0      | 1      |
+| D&M      | 0      | 0      | 0      | 0      | 0      | 0      |
+| D|M      | 0      | 1      | 1      | 1      | 0      | 1      |
 
 Destination table for `ddd`:
 |dest|d|d|d|Effect: store *comp* in|
