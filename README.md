@@ -1,6 +1,6 @@
 # 🖥️ 16-Bit CPU Project Using Logisim-evolution
 
-## 📚 Table of Contents
+## Table of Contents
 
 - [📋 Project Overview](#project-overview)
 - [✨ Features](#features)
@@ -12,13 +12,13 @@
 
 ---
 
-## 📋 Project Overview
+## Project Overview
 
-This project involves the implementation of a simple 16-bit CPU designed in
-[Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution).
-The CPU is built as part of an educational project inspired by the
-[Nand2Tetris](https://www.nand2tetris.org/) course. It demonstrates the basics
-of computer architecture, including instruction execution, memory management,
+This project involves the implementation of a simple 16-bit CPU designed in 
+[Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution). 
+The CPU is built as part of an educational project inspired by the 
+[Nand2Tetris](https://www.nand2tetris.org/) course. It demonstrates the basics 
+of computer architecture, including instruction execution, memory management, 
 and arithmetic operations.
 
 ### Goals:
@@ -29,13 +29,13 @@ and arithmetic operations.
 
 ---
 
-## ✨ Features
+## Features
 
 - **16-bit Architecture**: Supports 16-bit instructions and data.
-- **Arithmetic Logic Unit (ALU)**: Performs essential arithmetic and logical
-  operations such as addition, subtraction, and bitwise AND/OR.
-- **Registers**: Includes general-purpose registers and a program counter for
-  instruction execution.
+- **Arithmetic Logic Unit (ALU)**: Performs essential arithmetic and logical 
+operations such as addition, subtraction, and bitwise AND/OR.
+- **Registers**: Includes general-purpose registers and a program counter for 
+instruction execution.
 - **Memory**: Features ROM for program storage and RAM for data storage.
 - **Instruction Set**: Executes a small, custom-designed instruction set.
 
@@ -53,7 +53,7 @@ Below are the core components designed in Logisim-evolution:
 
 ---
 
-## 🏛️ Assembly Instructions
+## Assembly Instructions
 
 The CPU is designed to use specific assembly instruction. There is two type of
 instruction, A and C.
@@ -62,12 +62,12 @@ instruction, A and C.
 
 `Symbolic : @x` x is a decimal value.
 
-`Binary : 0 a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15` aa..a is the 15
+`Binary : 0 a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15` aa..a is the 15 
 bits value of x.
 
-x is the decimal value of a 15-bit address ranging from 0 to 32767.
+x is the decimal value of a 15-bit address ranging from 0 to 32767. 
 When the instruction is used we can then access the information at the location
-and use it.
+ and use it.
 
 #### C-instruction
 
@@ -91,7 +91,7 @@ Operators table of `acccccc`:
 if a=0:
 
 | **comp** | **c1** | **c2** | **c3** | **c4** | **c5** | **c6** |
-| -------- | ------ | ------ | ------ | ------ | ------ | ------ | --- |
+|----------|--------|--------|--------|--------|--------|--------|
 | 0        | 1      | 0      | 1      | 0      | 1      | 0      |
 | 1        | 1      | 1      | 1      | 1      | 1      | 1      |
 | -1       | 1      | 1      | 1      | 1      | 1      | 1      |
@@ -109,24 +109,24 @@ if a=0:
 | D-A      | 0      | 1      | 1      | 1      | 0      | 1      |
 | A-D      | 1      | 1      | 0      | 0      | 0      | 1      |
 | D&A      | 0      | 0      | 0      | 0      | 0      | 0      |
-| D        | A      | 0      | 1      | 1      | 1      | 0      | 1   |
+| D|A      | 0      | 1      | 1      | 1      | 0      | 1      |
 
-if a=1:
+if a=1: 
 | **comp** | **c1** | **c2** | **c3** | **c4** | **c5** | **c6** |
 |----------|--------|--------|--------|--------|--------|--------|
-| M | 1 | 0 | 1 | 0 | 1 | 0 |
-| !M | 1 | 0 | 1 | 1 | 1 | 0 |
-| -M | 1 | 0 | 1 | 1 | 1 | 1 |
-| M+1 | 1 | 0 | 1 | 1 | 1 | 1 |
-| M-1 | 1 | 0 | 1 | 0 | 1 | 0 |
-| D+M | 0 | 0 | 0 | 0 | 0 | 0 |
-| D-M | 0 | 1 | 1 | 1 | 0 | 1 |
-| M-D | 1 | 1 | 0 | 0 | 0 | 1 |
-| D&M | 0 | 0 | 0 | 0 | 0 | 0 |
-| D|M | 0 | 1 | 1 | 1 | 0 | 1 |
+| M        | 1      | 0      | 1      | 0      | 1      | 0      |
+| !M       | 1      | 0      | 1      | 1      | 1      | 0      |
+| -M       | 1      | 0      | 1      | 1      | 1      | 1      |
+| M+1      | 1      | 0      | 1      | 1      | 1      | 1      |
+| M-1      | 1      | 0      | 1      | 0      | 1      | 0      |
+| D+M      | 0      | 0      | 0      | 0      | 0      | 0      |
+| D-M      | 0      | 1      | 1      | 1      | 0      | 1      |
+| M-D      | 1      | 1      | 0      | 0      | 0      | 1      |
+| D&M      | 0      | 0      | 0      | 0      | 0      | 0      |
+| D|M      | 0      | 1      | 1      | 1      | 0      | 1      |
 
 Destination table for `ddd`:
-|dest|d|d|d|Effect: store _comp_ in|
+|dest|d|d|d|Effect: store *comp* in|
 |:---:|:---:|:---:|:---:|:---:|
 null|0|0|0|the value is not stored
 M|0|1|1|RAM[A]
@@ -141,17 +141,17 @@ Comparison table for `jjj`:
 |mnemonic|j1|j2|j3|Effect|
 |:---:|:---:|:---:|:---:|:---:|
 null|0|0|0|no jump
-JGT|0|0|1|if _comp_ > 0 jump
-JEQ|0|1|0|JEQ|if _comp_ = 0 jump
-JGE|0|1|1|JGE|if _comp_ ≥ 0 jump
-JLT|1|0|0|JLT|if _comp_ < 0 jump
-JNE|1|0|1|JNE|if _comp_ ≠ 0 jump
-JLE|1|1|0|JLE|if _comp_ ≤ 0 jump
+JGT|0|0|1|if *comp* > 0 jump
+JEQ|0|1|0|JEQ|if *comp* = 0 jump
+JGE|0|1|1|JGE|if *comp* ≥ 0 jump
+JLT|1|0|0|JLT|if *comp* < 0 jump
+JNE|1|0|1|JNE|if *comp* ≠ 0 jump
+JLE|1|1|0|JLE|if *comp* ≤ 0 jump
 JMP|1|1|1|JMP|unconditionnal jump
 
 ---
 
-## 🛠️ Getting Started
+## Getting Started
 
 To explore and simulate the CPU design, follow these steps:
 
@@ -179,7 +179,7 @@ To explore and simulate the CPU design, follow these steps:
 
 ---
 
-## 📂 Usage
+## Usage
 
 ### Loading a Program
 
@@ -203,10 +203,10 @@ Here is an example of a simple program (its the Max.hack in example files):
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- [Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution)
-  for providing an excellent and open source tool for digital logic design.
-- **Nand2Tetris**: The [Nand2Tetris](https://www.nand2tetris.org/) course for
-  inspiring this project.
+- [Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution) 
+for providing an excellent and open source tool for digital logic design.
+- **Nand2Tetris**: The [Nand2Tetris](https://www.nand2tetris.org/) course for 
+inspiring this project.
 - [The Elements of Computing Systems, second edition](https://mitpress.mit.edu/9780262539807/the-elements-of-computing-systems/)
