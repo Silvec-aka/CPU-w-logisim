@@ -198,7 +198,7 @@ To load a program into the CPU:
 Here is an example of a simple program loaded in the ROM (its the Max.hack in example files):
 
 <p align="center">
-    <img src="./img/CPUUI.png" alt="CPUUI" width="500"/>
+    <img src="./img/CPUUI.png" alt="CPUUI" width="800"/>
 </p>
 
 ---
